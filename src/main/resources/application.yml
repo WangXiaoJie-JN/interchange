@@ -1,0 +1,66 @@
+server:
+  compression:
+    enabled: true
+    mime-types: text/html,text/css,text/plain,text/xml,application/json
+  port: 8070
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jinleitu?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: leituadmin
+    password: leitupwd
+    #url: jdbc:mysql://lab.viewcent.net:6033/bladex_boot?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8&nullCatalogMeansCurrent=true&allowPublicKeyRetrieval=true
+    #username: root
+    #password: leitusys
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  resources:
+    static-locations:
+      - classpath:/resources/static/
+# mybatis
+mybatis-plus:
+  mapper-locations: classpath:com/viewcent/data/interchange/mapper/xml/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.viewcent.data.interchange.entity
+  #typeEnumsPackage: com.viewcent.dashboard.entity.enums
+  global-config:
+    # 关闭MP3.0自带的banner
+    banner: false
+    db-config:
+      #主键类型  0:"数据库ID自增", 1:"不操作", 2:"用户输入ID",3:"数字型snowflake", 4:"全局唯一ID UUID", 5:"字符串型snowflake";
+      id-type: id_worker
+      #字段策略
+      insert-strategy: not_null
+      update-strategy: not_null
+      select-strategy: not_empty
+      #驼峰下划线转换
+      table-underline: true
+      # 逻辑删除配置
+      # 逻辑删除全局值（1表示已删除，这也是Mybatis Plus的默认配置）
+      logic-delete-value: 1
+      # 逻辑未删除全局值（0表示未删除，这也是Mybatis Plus的默认配置）
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+wanliniu:
+  _app: 3023429349
+  _sign_kind: md5
+  _api_secret: 011e00486efc6a85dc383b27cb177bc3
+  companyId: 77482944481736
+  common_url: https://open-api.hupun.com/api
+  goods:
+    spec_query_url: /nr/goods/spec/open/query
+    query_with_date_url: /nr/goods/spec/open/query/goodswithspeclist
+    category_query_url: /nr/goods/catagory/querybyauth
+    shop_query_url: /nr/goods/shop/query
+    inventory_query_url: /nr/open/inventory/items/get/by/modifytime
+  trade:
+    query_url: /nr/openpostrade/querypostrade
+  member:
+    query_url: /crm/open/customer/querycustom
+    detail_query_url: /crm/open/membercenter/getmemberdetail
+
+
+
